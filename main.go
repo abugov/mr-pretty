@@ -37,7 +37,13 @@ func printRepo(line string) {
     alias := split[len(split)-1]
 
     if strings.HasPrefix(alias, "finished (") {
-        fmt.Println("\033[0;34m" + alias + "\033[0m")
+        if strings.Contains(alias, " failed") {
+            fmt.Println("\033[0;31m" + alias + "\033[0m")
+        } else if strings.Contains(alias, " ok") {
+            fmt.Println("\033[0;32m" + alias + "\033[0m")
+        } else {
+            fmt.Println("\033[0;34m" + alias + "\033[0m")
+        }
     } else {
         fmt.Println("\033[0;35m" + alias + "\033[0m" + " (" + line + ")")
     }
